@@ -1,0 +1,174 @@
+{
+  "tools": [
+    {
+      "name": "get_costs",
+      "description": "Azure cost for a scope, grouped by a dimension.\n\n    group_by: ResourceGroupName | ServiceName | ResourceLocation | SubscriptionName | MeterCategory\n    timeframe: MonthToDate | TheLastMonth | WeekToDate\n    cost_type: ActualCost | AmortizedCost\n    scope: one of the allowed scopes, e.g. /subscriptions/<id>. Defaults to the first allowed scope.\n    ",
+      "inputSchema": {
+        "properties": {
+          "group_by": {
+            "default": "ResourceGroupName",
+            "title": "Group By",
+            "type": "string"
+          },
+          "timeframe": {
+            "default": "MonthToDate",
+            "title": "Timeframe",
+            "type": "string"
+          },
+          "cost_type": {
+            "default": "ActualCost",
+            "title": "Cost Type",
+            "type": "string"
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Scope"
+          }
+        },
+        "title": "get_costsArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Result",
+            "type": "array"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_costsOutput",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "get_forecast",
+      "description": "Month-to-date actual cost plus forecast to the end of the current month.",
+      "inputSchema": {
+        "properties": {
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Scope"
+          }
+        },
+        "title": "get_forecastArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "top_spenders",
+      "description": "Top N cost contributors month-to-date (by ResourceGroupName or ServiceName).",
+      "inputSchema": {
+        "properties": {
+          "top": {
+            "default": 5,
+            "title": "Top",
+            "type": "integer"
+          },
+          "by": {
+            "default": "ResourceGroupName",
+            "title": "By",
+            "type": "string"
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Scope"
+          }
+        },
+        "title": "top_spendersArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Result",
+            "type": "array"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "top_spendersOutput",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "list_scopes",
+      "description": "Scopes this connector is allowed to query.",
+      "inputSchema": {
+        "properties": {},
+        "title": "list_scopesArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Result",
+            "type": "array"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "list_scopesOutput",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "openWorldHint": false
+      }
+    }
+  ]
+}

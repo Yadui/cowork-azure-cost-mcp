@@ -1,0 +1,49 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.28/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.28",
+  "version": "1.0.0",
+  "id": "<new-guid>",
+  "developer": {
+    "name": "Foetron",
+    "websiteUrl": "https://example.com",
+    "privacyUrl": "https://example.com/privacy",
+    "termsOfUseUrl": "https://example.com/terms"
+  },
+  "name": {
+    "short": "Azure Cost",
+    "full": "Azure Cost insights for Copilot Cowork"
+  },
+  "description": {
+    "short": "Read-only Azure spend, top spenders and month-end forecast.",
+    "full": "Lets Copilot Cowork query Azure Cost Management for allowed subscriptions: month-to-date cost by resource group or service, top spenders and the forecast to month end."
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "accentColor": "#0078D4",
+  "agentSkills": [
+    {
+      "folder": "./skills/azure-cost-review"
+    }
+  ],
+  "agentConnectors": [
+    {
+      "id": "azureCost",
+      "displayName": "Azure Cost",
+      "description": "Read-only Azure Cost Management tools.",
+      "toolSource": {
+        "remoteMcpServer": {
+          "mcpServerUrl": "https://<your-app>.<region>.azurecontainerapps.io/mcp",
+          "authorization": {
+            "type": "OAuthPluginVault",
+            "referenceId": "<teams-developer-portal-oauth-registration-id>"
+          },
+          "mcpToolDescription": {
+            "file": "tools/azure-cost-tools.json"
+          }
+        }
+      }
+    }
+  ]
+}
